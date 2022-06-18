@@ -7,4 +7,7 @@ public:
 	MainLoop();
 
 	int run();
+
+private:
+	void update();
 };

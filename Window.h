@@ -7,6 +7,7 @@ public:
 	Window();
 
 	void show();
+	void resize(int width, int height);
 
 	bool event(UINT uMsg, WPARAM wParam, LPARAM lParam);
 

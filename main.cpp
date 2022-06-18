@@ -8,5 +8,6 @@ int main(void) {
 	Window w;
 
 	w.show();
+
 	return ml.run();
 }
