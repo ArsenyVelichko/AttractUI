@@ -11,8 +11,7 @@ public:
 	static WindowRegister* instance();
 
 	HWND createPlatformWindow();
-
-	void windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+	LRESULT windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 private:
 	WindowRegister();

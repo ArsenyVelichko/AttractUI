@@ -10,3 +10,7 @@ void Window::show() {
 	ShowWindow(m_handler, SW_SHOWDEFAULT);
 }
 
+bool Window::event(UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	return false;
+}
+

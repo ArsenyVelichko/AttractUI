@@ -1,18 +1,12 @@
 #include <windows.h>
 
 #include "Window.h"
+#include "MainLoop.h"
 
 int main(void) {
+	MainLoop ml;
 	Window w;
 
 	w.show();
-
-	MSG msg = { };
-	while (GetMessage(&msg, NULL, 0, 0) > 0)
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-	}
-
-	return 0;
+	return ml.run();
 }

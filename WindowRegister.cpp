@@ -17,14 +17,7 @@ WindowRegister::WindowRegister() {
 }
 
 static LRESULT CALLBACK wndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
-//	std::cout << "Msg received" << std::endl;
-	switch (uMsg) {
-		case WM_DESTROY:
-			PostQuitMessage(0);
-			return 0;
-	}
-
-	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+	return WindowRegister::instance()->windowProc(hwnd, uMsg, wParam, lParam);
 }
 
 const char* WindowRegister::registerClass() {
@@ -65,7 +58,20 @@ HWND WindowRegister::createPlatformWindow() {
 	return handler;
 }
 
-void WindowRegister::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+LRESULT WindowRegister::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+	auto window = m_windows[hwnd];
+	bool handled = window->event(uMsg, wParam, lParam);
 
+	if (uMsg == WM_DESTROY) {
+		m_windows.erase(hwnd);
+
+		if (m_windows.empty()) {
+			PostQuitMessage(0);
+			handled = true;
+		}
+	}
+
+	if (handled) { return 0; }
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
